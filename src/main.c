@@ -17,7 +17,6 @@ void loop(void)
     }
     else
     {
-        // powrot
         pos_x--;
     }
 
@@ -31,10 +30,12 @@ void loop(void)
         direction = 1;
     }
 
-    buffer_write(DISPLAY_X - pos_x, (DISPLAY_Y / 2) - 1, '*');
-    buffer_write(pos_x, DISPLAY_Y / 2, '*');
-    buffer_write(DISPLAY_X - pos_x, (DISPLAY_Y / 2) + 1, '*');
+    buffer_write(DISPLAY_X - pos_x, (DISPLAY_Y / 2) - 1, '*', YELLOW);
+    buffer_write(pos_x, DISPLAY_Y / 2, '*', GREEN);
+    buffer_write(DISPLAY_X - pos_x, (DISPLAY_Y / 2) + 1, '*', BLUE);
 
+    buffer_write(0, 0, '*', CYAN);
+    buffer_write(DISPLAY_X - 1, DISPLAY_Y - 1, '*', MAGENTA);
     buffer_draw();
 }
 
