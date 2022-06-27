@@ -18,9 +18,12 @@ static void *loop(void *data)
     return 0;
 }
 
-void start_loop(void (*callback)(void))
+void start_loop(void (*callback)(void), uint8_t join)
 {
     pthread_t loop_thread;
     pthread_create(&loop_thread, NULL, loop, callback);
-    pthread_join(loop_thread, NULL);
+    if (join)
+    {
+        pthread_join(loop_thread, NULL);
+    }
 }

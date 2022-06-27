@@ -1,4 +1,4 @@
-FILES= ./build/main.o ./build/system.o ./build/render.o
+FILES= ./build/main.o ./build/system.o ./build/render.o ./build/getch.o ./build/shapes.o ./build/helper.o
 INCLUDES= -I./src
 FLAGS= -g -Wall -O0
 
@@ -13,6 +13,15 @@ all: $(FILES)
 
 ./build/render.o: ./src/graphics/render.c
 	gcc $(INCLUDES) $(FLAGS) -c ./src/graphics/render.c -o ./build/render.o
+
+./build/shapes.o: ./src/graphics/shapes.c
+	gcc $(INCLUDES) $(FLAGS) -c ./src/graphics/shapes.c -o ./build/shapes.o
+
+./build/getch.o: ./src/util/getch.c
+	gcc $(INCLUDES) $(FLAGS) -c ./src/util/getch.c -o ./build/getch.o
+
+./build/helper.o: ./src/util/helper.c
+	gcc $(INCLUDES) $(FLAGS) -c ./src/util/helper.c -o ./build/helper.o
 
 clean:
 	rm -rf $(FILES)

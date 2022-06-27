@@ -6,6 +6,11 @@
 #define DISPLAY_X 50U
 #define DISPLAY_Y 20U
 
+#define START_X 0
+#define END_X (DISPLAY_X - 1)
+#define START_Y 0
+#define END_Y (DISPLAY_Y - 1)
+
 #define WHITE 0
 #define RED 1
 #define GREEN 2

@@ -19,8 +19,8 @@ void buffer_write(uint8_t x, uint8_t y, uint8_t value, uint8_t color)
 {
     if ((x >= 0 && x < DISPLAY_X) && (y >= 0 && y < DISPLAY_Y))
     {
-        display_buffer[x][y] = value;
-        color_buffer[x][y] = color;
+        display_buffer[x][DISPLAY_Y - y - 1] = value;
+        color_buffer[x][DISPLAY_Y - y - 1] = color;
     }
 }
 
