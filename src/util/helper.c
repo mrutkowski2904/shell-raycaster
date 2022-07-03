@@ -1,10 +1,8 @@
-#include <stdint.h>
-
 #include "util/helper.h"
 
-void swap(uint8_t *a, uint8_t *b)
+void swap(char *a, char *b)
 {
-    uint8_t tmp = *a;
+    char tmp = *a;
     *a = *b;
     *b = tmp;
 }

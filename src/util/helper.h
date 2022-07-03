@@ -1,8 +1,9 @@
 #ifndef HELPER_H
 #define HELPER_H
 
-#include <stdint.h>
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
-void swap(uint8_t *a, uint8_t *b);
+void swap(char *a, char *b);
 
 #endif

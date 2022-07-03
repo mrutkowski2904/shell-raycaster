@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define DISPLAY_X 50U
+#define DISPLAY_X 80U
 #define DISPLAY_Y 20U
 
 #define START_X 0
@@ -20,7 +20,7 @@
 #define CYAN 6
 
 void display_clear(void);
-void buffer_write(uint8_t x, uint8_t y, uint8_t value, uint8_t color);
+void buffer_write(int8_t x, int8_t y, uint8_t value, uint8_t color);
 void buffer_draw(void);
 void buffer_clear(void);
 
