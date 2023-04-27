@@ -1,5 +1,5 @@
 FILES= ./build/main.o ./build/system.o ./build/render.o ./build/getch.o ./build/shapes.o ./build/helper.o
-INCLUDES= -I./src -lm
+INCLUDES= -I./src
 FLAGS= -g -Wall -O0
 
 all: $(FILES)
