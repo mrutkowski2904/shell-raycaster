@@ -5,7 +5,7 @@
 #include "graphics/render.h"
 #include "util/helper.h"
 
-void draw_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8_t color)
+void draw_line(int16_t start_x, int16_t start_y, int16_t end_x, int16_t end_y, uint8_t color)
 {
     if (start_x > end_x)
     {
@@ -49,7 +49,7 @@ void draw_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8
     // tmp = b * 3;
     // b = tmp / 3.0;
 
-    int8_t y;
+    int16_t y;
 
     while (start_x < end_x)
     {
@@ -59,7 +59,7 @@ void draw_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8
     }
 }
 
-void rotate_point(int8_t *src_x, int8_t *src_y, int8_t pivot_x, int8_t pivot_y, float angle)
+void rotate_point(int16_t *src_x, int16_t *src_y, int16_t pivot_x, int16_t pivot_y, float angle)
 {
     float new_x, new_y;
     float s = sinf(angle);
@@ -75,19 +75,19 @@ void rotate_point(int8_t *src_x, int8_t *src_y, int8_t pivot_x, int8_t pivot_y, 
     *src_y = new_y + pivot_y;
 }
 
-void draw_rectangle_2point(int8_t x1, int8_t y1, int8_t x2, int8_t y2, uint8_t color, uint8_t fill)
+void draw_rectangle_2point(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint8_t color, uint8_t fill)
 {
-    int8_t ll_x = x1;
-    int8_t ll_y = y1;
+    int16_t ll_x = x1;
+    int16_t ll_y = y1;
 
-    int8_t lr_x = x2;
-    int8_t lr_y = y1;
+    int16_t lr_x = x2;
+    int16_t lr_y = y1;
 
-    int8_t ul_x = x1;
-    int8_t ul_y = y2;
+    int16_t ul_x = x1;
+    int16_t ul_y = y2;
 
-    int8_t ur_x = x2;
-    int8_t ur_y = y2;
+    int16_t ur_x = x2;
+    int16_t ur_y = y2;
 
     draw_line(ll_x, ll_y, lr_x, lr_y, color);
     draw_line(ll_x, ll_y, ul_x, ul_y, color);
@@ -97,15 +97,15 @@ void draw_rectangle_2point(int8_t x1, int8_t y1, int8_t x2, int8_t y2, uint8_t c
 
     if (fill)
     {
-        int8_t start_x = MIN(x1, x2);
-        int8_t end_x = MAX(x1, x2);
+        int16_t start_x = MIN(x1, x2);
+        int16_t end_x = MAX(x1, x2);
 
-        int8_t start_y = MIN(y1, y2);
-        int8_t end_y = MAX(y1, y2);
+        int16_t start_y = MIN(y1, y2);
+        int16_t end_y = MAX(y1, y2);
 
-        for (int8_t x = start_x; x <= end_x; x++)
+        for (int16_t x = start_x; x <= end_x; x++)
         {
-            for (int8_t y = start_y; y <= end_y; y++)
+            for (int16_t y = start_y; y <= end_y; y++)
             {
                 buffer_write(x, y, color);
             }

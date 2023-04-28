@@ -56,12 +56,8 @@ void game_loop(void)
 
   // draw floor and ceiling
   for (int y = 0; y < DISPLAY_HEIGHT; y++)
-  {
     for (int x = 0; x < DISPLAY_WIDTH; x++)
-    {
-      buffer_write(x, y, y <= (DISPLAY_HEIGHT / 2) ? RED : BLUE);
-    }
-  }
+      buffer_write(x, y, (y <= DISPLAY_HEIGHT / 2) ? GREEN : BLUE);
 
   // draw walls
   for (int x = 0; x < DISPLAY_WIDTH; x++)

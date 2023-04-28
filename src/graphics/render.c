@@ -14,7 +14,7 @@ void display_clear(void)
   system("printf '\033[;H'");
 }
 
-void buffer_write(int8_t x, int8_t y, uint8_t color)
+void buffer_write(int16_t x, int16_t y, uint8_t color)
 {
   if ((x >= 0 && x < DISPLAY_WIDTH) && (y >= 0 && y < DISPLAY_HEIGHT))
   {
@@ -24,9 +24,9 @@ void buffer_write(int8_t x, int8_t y, uint8_t color)
 
 void buffer_draw(void)
 {
-  for (uint8_t y = 0; y <= DISPLAY_HEIGHT + 1; y++)
+  for (uint16_t y = 0; y <= DISPLAY_HEIGHT + 1; y++)
   {
-    for (uint8_t x = 0; x <= DISPLAY_WIDTH + 1; x++)
+    for (uint16_t x = 0; x <= DISPLAY_WIDTH + 1; x++)
     {
       if (x == 0 || y == 0 || x == DISPLAY_WIDTH + 1 || y == DISPLAY_HEIGHT + 1)
       {
@@ -65,6 +65,9 @@ static void draw_pixel(uint8_t value)
     break;
   case RED:
     printf("\033[101;97m \033[0m");
+    break;
+  case GREEN:
+    printf("\033[102;97m \033[0m");
     break;
   }
 }
