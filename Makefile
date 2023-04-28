@@ -1,9 +1,10 @@
 FILES= ./build/main.o ./build/system.o ./build/render.o ./build/getch.o ./build/shapes.o ./build/helper.o
 INCLUDES= -I./src
-FLAGS= -g -Wall -O0
+LINK_FLAGS = -lm
+FLAGS= -Wall -O0
 
 all: $(FILES)
-	gcc $(FILES) $(INCLUDES) -o ./bin/raycaster
+	gcc $(FILES) $(INCLUDES) $(LINK_FLAGS) -o ./bin/raycaster
 
 ./build/main.o: ./src/main.c
 	gcc $(INCLUDES) $(FLAGS) -c ./src/main.c -o ./build/main.o

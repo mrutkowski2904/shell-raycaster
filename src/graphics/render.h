@@ -3,13 +3,13 @@
 
 #include <stdint.h>
 
-#define DISPLAY_X 80U
-#define DISPLAY_Y 20U
+#define DISPLAY_WIDTH 80U
+#define DISPLAY_HEIGHT 20U
 
 #define START_X 0
-#define END_X (DISPLAY_X - 1)
+#define END_X (DISPLAY_WIDTH - 1)
 #define START_Y 0
-#define END_Y (DISPLAY_Y - 1)
+#define END_Y (DISPLAY_HEIGHT - 1)
 
 #define WHITE 0
 #define RED 1
