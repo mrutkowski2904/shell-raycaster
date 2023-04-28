@@ -6,21 +6,19 @@
 #include "render.h"
 
 static uint8_t display_buffer[DISPLAY_WIDTH][DISPLAY_HEIGHT] = {0};
-static uint8_t color_buffer[DISPLAY_WIDTH][DISPLAY_HEIGHT] = {0};
 
-static void draw_pixel(uint8_t value, uint8_t color);
+static void draw_pixel(uint8_t value);
 
 void display_clear(void)
 {
   system("printf '\033[;H'");
 }
 
-void buffer_write(int8_t x, int8_t y, uint8_t value, uint8_t color)
+void buffer_write(int8_t x, int8_t y, uint8_t color)
 {
   if ((x >= 0 && x < DISPLAY_WIDTH) && (y >= 0 && y < DISPLAY_HEIGHT))
   {
-    display_buffer[x][DISPLAY_HEIGHT - y - 1] = value;
-    color_buffer[x][DISPLAY_HEIGHT - y - 1] = color;
+    display_buffer[x][DISPLAY_HEIGHT - y - 1] = color;
   }
 }
 
@@ -37,8 +35,7 @@ void buffer_draw(void)
       else
       {
         uint8_t value = display_buffer[x - 1][y - 1];
-        uint8_t color = color_buffer[x - 1][y - 1];
-        draw_pixel(value, color);
+        draw_pixel(value);
       }
     }
     printf("\n");
@@ -48,40 +45,26 @@ void buffer_draw(void)
 void buffer_clear(void)
 {
   memset(display_buffer, 0, DISPLAY_WIDTH * DISPLAY_HEIGHT * sizeof(uint8_t));
-  memset(color_buffer, 0, DISPLAY_WIDTH * DISPLAY_HEIGHT * sizeof(uint8_t));
 }
 
-static void draw_pixel(uint8_t value, uint8_t color)
+static void draw_pixel(uint8_t value)
 {
-  if (value)
+  switch (value)
   {
-    switch (color)
-    {
-    case RED:
-      printf("\033[1;31m%c\033[0m", (char)value);
-      break;
-    case GREEN:
-      printf("\033[1;32m%c\033[0m", (char)value);
-      break;
-    case YELLOW:
-      printf("\033[1;33m%c\033[0m", (char)value);
-      break;
-    case BLUE:
-      printf("\033[1;34m%c\033[0m", (char)value);
-      break;
-    case MAGENTA:
-      printf("\033[1;35m%c\033[0m", (char)value);
-      break;
-    case CYAN:
-      printf("\033[1;36m%c\033[0m", (char)value);
-      break;
-    default:
-      printf("%c", (char)value);
-      break;
-    }
-  }
-  else
-  {
+  case BLACK:
     printf(" ");
+    break;
+  case WHITE:
+    printf("\033[107;97m \033[0m");
+    break;
+  case GRAY:
+    printf("\033[100;97m \033[0m");
+    break;
+  case BLUE:
+    printf("\033[104;97m \033[0m");
+    break;
+  case RED:
+    printf("\033[101;97m \033[0m");
+    break;
   }
 }

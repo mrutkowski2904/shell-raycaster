@@ -5,7 +5,7 @@
 #include "graphics/render.h"
 #include "util/helper.h"
 
-void draw_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8_t value, uint8_t color)
+void draw_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8_t color)
 {
     if (start_x > end_x)
     {
@@ -22,7 +22,7 @@ void draw_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8
         }
         while (start_y < end_y)
         {
-            buffer_write(start_x, start_y, value, color);
+            buffer_write(start_x, start_y, color);
             start_y++;
         }
     }
@@ -32,7 +32,7 @@ void draw_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8
     {
         while (start_x <= end_x)
         {
-            buffer_write(start_x, start_y, value, color);
+            buffer_write(start_x, start_y, color);
             start_x++;
         }
     }
@@ -54,7 +54,7 @@ void draw_line(int8_t start_x, int8_t start_y, int8_t end_x, int8_t end_y, uint8
     while (start_x < end_x)
     {
         y = (a * start_x) + b;
-        buffer_write(start_x, y, value, color);
+        buffer_write(start_x, y, color);
         start_x++;
     }
 }
@@ -75,7 +75,7 @@ void rotate_point(int8_t *src_x, int8_t *src_y, int8_t pivot_x, int8_t pivot_y, 
     *src_y = new_y + pivot_y;
 }
 
-void draw_rectangle_2point(int8_t x1, int8_t y1, int8_t x2, int8_t y2, uint8_t value, uint8_t color, uint8_t fill)
+void draw_rectangle_2point(int8_t x1, int8_t y1, int8_t x2, int8_t y2, uint8_t color, uint8_t fill)
 {
     int8_t ll_x = x1;
     int8_t ll_y = y1;
@@ -89,11 +89,11 @@ void draw_rectangle_2point(int8_t x1, int8_t y1, int8_t x2, int8_t y2, uint8_t v
     int8_t ur_x = x2;
     int8_t ur_y = y2;
 
-    draw_line(ll_x, ll_y, lr_x, lr_y, value, color);
-    draw_line(ll_x, ll_y, ul_x, ul_y, value, color);
+    draw_line(ll_x, ll_y, lr_x, lr_y, color);
+    draw_line(ll_x, ll_y, ul_x, ul_y, color);
 
-    draw_line(ul_x, ul_y, ur_x, ur_y, value, color);
-    draw_line(ur_x, ur_y, lr_x, lr_y, value, color);
+    draw_line(ul_x, ul_y, ur_x, ur_y, color);
+    draw_line(ur_x, ur_y, lr_x, lr_y, color);
 
     if (fill)
     {
@@ -107,7 +107,7 @@ void draw_rectangle_2point(int8_t x1, int8_t y1, int8_t x2, int8_t y2, uint8_t v
         {
             for (int8_t y = start_y; y <= end_y; y++)
             {
-                buffer_write(x, y, value, color);
+                buffer_write(x, y, color);
             }
         }
     }

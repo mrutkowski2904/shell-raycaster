@@ -31,7 +31,7 @@ uint8_t map[MAP_WIDTH][MAP_HEIGHT] =
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -43,7 +43,7 @@ uint8_t map[MAP_WIDTH][MAP_HEIGHT] =
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
 
-float position_x = 1, position_y = 1;
+float position_x = MAP_WIDTH / 2, position_y = 1;
 float direction_x = -1, direction_y = 0;
 float cam_plane_x = 0, cam_plane_y = 0.66;
 
@@ -54,9 +54,16 @@ void game_loop(void)
   buffer_clear();
   display_clear();
 
-  buffer_write(START_X, START_Y, 'S', WHITE);
-  buffer_write(END_X, END_Y, 'E', WHITE);
+  // draw floor and ceiling
+  for (int y = 0; y < DISPLAY_HEIGHT; y++)
+  {
+    for (int x = 0; x < DISPLAY_WIDTH; x++)
+    {
+      buffer_write(x, y, y <= (DISPLAY_HEIGHT / 2) ? RED : BLUE);
+    }
+  }
 
+  // draw walls
   for (int x = 0; x < DISPLAY_WIDTH; x++)
   {
     // continue;
@@ -142,17 +149,16 @@ void game_loop(void)
     if (line_end >= DISPLAY_HEIGHT)
       line_end = DISPLAY_HEIGHT - 1;
 
-    char symbol = '*';
+    uint8_t color = WHITE;
 
     if (side == 1)
-      symbol = '.';
+      color = GRAY;
 
-    draw_line(x, line_start, x, line_end, symbol, WHITE);
+    draw_line(x, line_start, x, line_end, color);
   }
 
   if (pressed_key)
   {
-    buffer_write(0, 3, pressed_key, CYAN);
     if (pressed_key == 'w')
     {
       if (map[(int)(position_x + direction_x * MOVE_SPEED)][(int)position_y] == 0)
