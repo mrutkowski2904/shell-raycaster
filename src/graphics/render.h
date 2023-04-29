@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#define DISPLAY_WIDTH 180U
-#define DISPLAY_HEIGHT 50U
+#define DISPLAY_WIDTH 90U
+#define DISPLAY_HEIGHT 20U
 
 #define START_X 0
 #define END_X (DISPLAY_WIDTH - 1)
